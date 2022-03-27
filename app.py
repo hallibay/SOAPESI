@@ -3,11 +3,12 @@ from flask import Flask
 from suds.client import Client
 
 app = Flask("__name__")
-client = Client('http://bb1d-193-40-13-171.ngrok.io/', cache=None)
+client = Client('http://localhost:8090/?wsdl', cache=None)
 
 @app.route('/')
 def index():
-    return client.service.your_method_name(arguments)
+    return "hello world"
+
 
 
 if __name__ == "__main__":
