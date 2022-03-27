@@ -1,4 +1,4 @@
-from spyne import Application, rpc, ServiceBase, Iterable, Integer, Unicode
+from spyne import Application, rpc, ServiceBase, Iterable, Integer, Unicode, String
 
 from spyne.protocol.soap import Soap11
 from spyne.server.wsgi import WsgiApplication
@@ -25,6 +25,20 @@ class HelloWorldService(ServiceBase):
         for i in range(times):
             yield u'Tere, %s' % name
 
+    @rpc(String, _returns=Iterable(Unicode))
+    def ping_host(ctx,host_name):
+        returned_result = os.system(f"ping -c 2 {host_name}")
+        if returned_result == 0:
+            yield "Successful"
+        else:
+            yield "Domain is Down"
+
+    @rpc(String, _returns=Iterable(Unicode))     
+    def show_ip(ctx,host_name):
+        returned_result = dns.resolver.query(host_name, 'A')
+        for i in returned_result:
+            ip_address = i.to_text()
+        yield ip_address
 
 application = Application([HelloWorldService], 'spyne.examples.hello.soap',
                           in_protocol=Soap11(validator='lxml'),
