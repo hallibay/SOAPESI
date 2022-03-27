@@ -3,7 +3,7 @@ from flask import Flask
 from suds.client import Client
 
 app = Flask("__name__")
-client = Client('link to your wsdl file', cache=None)
+client = Client('http://bb1d-193-40-13-171.ngrok.io/', cache=None)
 
 @app.route('/')
 def index():
