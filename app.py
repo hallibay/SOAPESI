@@ -3,7 +3,7 @@ from flask import Flask,request
 from suds.client import Client
 
 app = Flask("__name__")
-client = Client('http://9346-193-40-12-11.ngrok.io/?wsdl', cache=None)
+client = Client('http://6412-193-40-13-170.ngrok.io/?wsdl', cache=None)
 #client = Client('http://localhost:8090/?wsdl', cache=None)#
 
 # the Ping
