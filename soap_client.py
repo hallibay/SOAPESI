@@ -1,6 +1,6 @@
 from suds.client import Client
 
-client = Client('http://localhost:8090/?wsdl', cache=None)
+client = Client('https://a907-193-40-13-162.ngrok.io/?wsdl', cache=None)
 
 # print(client.service.say_hello(u'Maarika', 5))
 #print("Running Service 1 ...")

@@ -40,6 +40,19 @@ class HelloWorldService(ServiceBase):
             ip_address = i.to_text()
         yield ip_address
 
+    @rpc(String, _returns=Iterable(Unicode))     
+    def show_dns(ctx,host_name):
+        items = ['MX','NS']
+        for item in items:
+            try:
+                returned_result = dns.resolver.query(host_name, item)
+                for i in returned_result:
+                    yield i.to_text()
+            except:
+                yield "domain does not exist"
+
+    
+
 application = Application([HelloWorldService], 'spyne.examples.hello.soap',
                           in_protocol=Soap11(validator='lxml'),
                           out_protocol=Soap11())
